@@ -7,14 +7,14 @@ const ApplicationSchema = Schema(
       ref: "job",
       required: true,
     },
-    applica: {
+    applicant: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: "User",
       required: true,
     },
     status: {
       type: String,
-      enum: ["penidng", "accepted", "rejected"],
+      enum: ["pending", "accepted", "rejected"],
       default: "pending",
     },
     location: {
@@ -23,13 +23,7 @@ const ApplicationSchema = Schema(
     logo: {
       type: String, // url for company logo
     },
-    userID: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-      required: true,
-    },
   },
   { timestamps: true }
 );
-export const Application = model("job", ApplicationSchema);
-F;
+export const Application = model("application", ApplicationSchema);

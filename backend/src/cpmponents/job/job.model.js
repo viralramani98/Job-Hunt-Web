@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const jobSchema = Schema(
+const jobSchema = new Schema(
   {
     title: {
       type: String,
@@ -9,11 +9,11 @@ const jobSchema = Schema(
     description: {
       type: String,
       required: true,
-      unique: true,
+      // ❌ removed unique: true (this caused E11000 duplicate key error)
     },
     requirements: [
       {
-        type: Number,
+        type: String,
       },
     ],
     salary: {
@@ -24,22 +24,21 @@ const jobSchema = Schema(
       type: String,
       required: true,
     },
-    jobtype: {
+    jobType: {
       type: String,
-      required: true,
-    },
-    role: {
-      type: String,
-      enum: ["stident", "recruiter"],
       required: true,
     },
     position: {
       type: Number,
       required: true,
     },
+    experienceLevel: {   // ✅ fixed spelling
+      type: Number,
+      required: true,
+    },
     company: {
       type: Schema.Types.ObjectId,
-      ref: "Company",
+      ref: "company",
       required: true,
     },
     created_by: {
@@ -47,11 +46,14 @@ const jobSchema = Schema(
       ref: "user",
       required: true,
     },
-    applications : [{
+    applications: [
+      {
         type: Schema.Types.ObjectId,
-      ref: "Application",
-    }],
+        ref: "application",
+      },
+    ],
   },
   { timestamps: true }
 );
-export const job = model("job", jobSchema);
+
+export const Job = model("job", jobSchema);

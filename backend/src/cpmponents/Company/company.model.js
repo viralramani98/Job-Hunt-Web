@@ -21,10 +21,10 @@ const CompanySchema = Schema(
     },
     userID: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: "User",
       required: true,
     },
   },
   { timestamps: true }
 );
-export const Company = model("job", CompanySchema);
+export const Company = model("company", CompanySchema);
